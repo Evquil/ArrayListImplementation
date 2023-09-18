@@ -1,6 +1,11 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/*
+Learned about the important of double checking between each run to make sure I didn't forget something like size++. I also learned about iterators and how they work.
+I had difficulties in running my code at the end because I made a single mistake, but it made a forever loop that I had to isolate to find which was really challenging since I had to go back through the test code and comment out all of the parts that could be an issue until I found it.
+*/
+
 /**
  * An implementation of MyList with an array (a longer exercise would be to
  * implement the List interface as is done in the class java.util.ArrayList: the
@@ -40,6 +45,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Returns the number of elements in this list.
+
+	O(1)
 	 */
 	public int size() {
 		return this.size;
@@ -47,11 +54,16 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Returns true if this list contains no elements.
+
+	O(1)
 	 */
 	public boolean isEmpty() {
 		return (this.size==0);
 	}
-	
+
+	/*
+	O(n)
+	*/
 	public void extraCapacity(int extraCapacity) {
 		if(this.size + extraCapacity > this.items.length) {
 			int newCapacity = this.items.length * 2 + extraCapacity;
@@ -64,6 +76,8 @@ public class MyArrayList<E> implements MyList<E> {
 	}
 	/**
 	 * Appends the specified element to the end of this list
+
+	O(n*1)
 	 */
 	public boolean add(E o) {
 		// If there is no room in the array items
@@ -78,6 +92,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Empties this List
+
+	O(n)
 	 */
 	public void clear() {
 		for(int i = 0; i < this.size; i++) {
@@ -88,6 +104,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Returns the element at the specified position in this list.
+
+	O(1)
 	 */
 	public E get(int index) {
 		return this.items[index];
@@ -95,6 +113,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Returns the index of the specified element (-1 if there is no match)
+
+	O(n)
 	 */
 	public int indexOf(Object o) {
 		// If o is null (look for a null element in the array)
@@ -113,6 +133,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Returns true if this list contains the specified element.
+
+	O(n*1)
 	 */
 	public boolean contains(Object o) {
 		// easy with indexOf
@@ -125,6 +147,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Removes the element in the List at position index
+
+	O(n)
 	 */
 	public boolean remove(int index) {
 
@@ -146,6 +170,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Removes the element in the List at position index
+
+	O(n^2)
 	 */
 	public boolean remove(Object o) {
 		// easy with indexOf and remove
@@ -161,6 +187,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Adds the specified object at the specified location
+
+	O(n^2)
 	 */
 	public boolean add(int index, E o) {
 		this.extraCapacity(1);
@@ -179,6 +207,8 @@ public class MyArrayList<E> implements MyList<E> {
 
 	/**
 	 * Is this List equal to the specified object?
+
+	O(n)
 	 */
 public boolean equals(Object o)
     {
@@ -224,6 +254,8 @@ public boolean equals(Object o)
 
 		/**
 		 * Any element left in the list?
+
+		O(1)
 		 */
 		public boolean hasNext() {
 			//System.out.println("Index + IteratorSize " + index + " " + list.size());
@@ -232,6 +264,8 @@ public boolean equals(Object o)
 
 		/**
 		 * Returns the current element in the list and move to the next element
+
+		O(1)
 		 */
 		public E next() {
 			if(!hasNext()) {
@@ -244,6 +278,8 @@ public boolean equals(Object o)
 
 		/**
 		 * Removes the last object returned by next
+
+		O(1)
 		 */
 		public void remove() {
 			list.remove(--index);
